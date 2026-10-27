@@ -103,4 +103,3 @@ for word, count in sorted(final_result.items()):
 
 The Word Count program using the MapReduce programming model was implemented successfully, and the frequency of each word in the given input text was computed correctly.
 
-```

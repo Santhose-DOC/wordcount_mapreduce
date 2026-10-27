@@ -1,6 +1,6 @@
 # Exp 02 Word Count using MapReduce
 
-**Date:**
+**Date:** 27/10/2026
 
 ## AIM:
 To implement the Word Count program using the MapReduce programming model and determine the frequency of each word in the given input text.
@@ -33,11 +33,71 @@ Verify and display the word frequencies.
 
 ## PROGRAM:
 
-*(Paste the Java code for the Word Count MapReduce program here.)*
+```python
+# Name: Santhose Arockiaraj J
+# Reg No: 212224230248
+
+# Word Count using MapReduce
+
+text = "big data is big and data is important"
+
+# Mapper phase
+def mapper(text):
+    intermediate = []
+
+    words = text.lower().split()
+
+    for word in words:
+        intermediate.append((word, 1))
+
+    return intermediate
+
+
+# Shuffle and Sort phase
+def shuffle_sort(intermediate):
+    grouped = {}
+
+    for word, count in intermediate:
+        if word not in grouped:
+            grouped[word] = []
+        grouped[word].append(count)
+
+    return grouped
+
+
+# Reducer phase
+def reducer(grouped):
+    result = {}
+
+    for word, counts in grouped.items():
+        result[word] = sum(counts)
+
+    return result
+
+
+# Execute MapReduce
+mapped_data = mapper(text)
+
+print("Mapper Output:")
+for item in mapped_data:
+    print(item)
+
+grouped_data = shuffle_sort(mapped_data)
+
+print("\nShuffle and Sort Output:")
+for word, counts in grouped_data.items():
+    print(f"{word}: {counts}")
+
+final_result = reducer(grouped_data)
+
+print("\nReducer Output (Word Frequencies):")
+for word, count in sorted(final_result.items()):
+    print(f"{word}: {count}")
+
+```
 
 ## OUTPUT:
-
-*(Paste the execution output showing the frequency of each word here.)*
+![alt text](image.png)
 
 ## RESULT:
 
